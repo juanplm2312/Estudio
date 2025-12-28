@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
 use Livewire\Volt\Volt;
+use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('welcome');
@@ -29,4 +30,20 @@ Route::middleware(['auth'])->group(function () {
             ),
         )
         ->name('two-factor.show');
+});
+
+Route::get('/inicio', function () {
+    return view('usuarios.inicio');
+})->name('inicio');
+
+Route::get('/suma', function () {
+    return view('usuarios.suma');
+})->name('suma');
+
+Route::post('/suma', function (Request $request) {
+    $num1 = $request->input('num1');
+    $num2 = $request->input('num2');
+    $resultado = $num1 + $num2;
+    return view('usuarios.suma', ['resultado' => $resultado]); 
+    
 });
